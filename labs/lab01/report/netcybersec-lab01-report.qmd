@@ -108,16 +108,16 @@ graph TD
 
 ### Обнаружение
 
-В ViPNet IDS NS по правилу `ET SCAN Sqlmap SQL Injection Scan` (код события 2008538, класс `attempted-recon`) зафиксировано сканирование веб-сервера PHP инструментом `sqlmap/1.7.2` с источника 195.239.174.11 (рис. -@fig-sql-event, -@fig-sql-source). Непосредственно после — событие `ET TROJAN Possible Metasploit Payload` (рис. -@fig-metasploit-event, -@fig-metasploit-source), подтверждающее успешную эксплуатацию уязвимости и установление meterpreter-сессии на порту 4444.
+В ViPNet IDS NS по правилу `ET SCAN Sqlmap SQL Injection Scan` (код события 2008538, класс `attempted-recon`) зафиксировано сканирование веб-сервера PHP инструментом `sqlmap/1.7.2` с источника 195.239.174.11 (рис. -@fig-sql-event, -@fig-sql-source). Непосредственно после — событие `ET TROJAN Possible Metasploit Payload` (рис. -@fig-ms-event, -@fig-ms-source), подтверждающее успешную эксплуатацию уязвимости и установление meterpreter-сессии на порту 4444.
 
 ::: {#fig-sql-event}
-![](image/lab01/01-sql-event.png){width=90%}
+![](image/01-sql-event.png){width=90%}
 
 Событие ViPNet IDS NS: `ET SCAN Sqlmap SQL Injection Scan`, источник sqlmap/1.7.2
 :::
 
 ::: {#fig-sql-source}
-![](image/lab01/02-sql-source.png){width=70%}
+![](image/02-sql-source.png){width=70%}
 
 Источник события: IP 195.239.174.11, геолокация Россия, Москва
 :::
@@ -127,7 +127,7 @@ graph TD
 Заведена карточка инцидента: источник — Kali (195.239.174.11), поражённый актив — Web Server PHP (10.10.1.20), индикаторы компрометации — `attempted-recon/sqlmap`, рекомендации — добавить валидацию входных параметров (`is_numeric` для `id`), заблокировать IP 195.239.174.11, завершить активные сессии (рис. -@fig-card-1).
 
 ::: {#fig-card-1}
-![](image/lab01/09-incident-card-1.png){width=90%}
+![](image/09-incident-card-1.png){width=90%}
 
 Карточка инцидента №1: SQL-инъекция на веб-портале
 :::
@@ -166,19 +166,19 @@ graph TD
 В ViPNet IDS NS зафиксировано событие `ET TROJAN Possible Metasploit Payload Common Construct Bind_API (from server)` (код 2025644, класс `trojan-activity`, уровень важности «Высокий») между атакующим 195.239.174.11 (порт 444) и рабочей станцией администратора 10.10.4.10 (порт 50162) — рис. -@fig-ms-event – -@fig-ms-dest. Событие свидетельствует об успешной компрометации узла через фишинговое письмо с вредоносным вложением.
 
 ::: {#fig-ms-event}
-![](image/lab01/03-metasploit-event.png){width=90%}
+![](image/03-metasploit-event.png){width=90%}
 
 Событие ViPNet IDS NS: `ET TROJAN Possible Metasploit Payload Common Construct Bind_API`
 :::
 
 ::: {#fig-ms-source}
-![](image/lab01/04-metasploit-source.png){width=70%}
+![](image/04-metasploit-source.png){width=70%}
 
 Источник события: 195.239.174.11, порт 444
 :::
 
 ::: {#fig-ms-dest}
-![](image/lab01/05-metasploit-dest.png){width=70%}
+![](image/05-metasploit-dest.png){width=70%}
 
 Получатель события: Administrator Workstation 10.10.4.10, порт 50162
 :::
@@ -188,7 +188,7 @@ graph TD
 Источник — Kali (195.239.174.11), поражённый актив — Administrator Workstation (10.10.4.10), индикаторы компрометации — `trojan-activity/Metasploit Payload`, рекомендации — завершить сессию с атакующим (`netstat -ano` + `taskkill`), включить Real-time Protection Windows Defender, провести полное сканирование узла (рис. -@fig-card-2).
 
 ::: {#fig-card-2}
-![](image/lab01/10-incident-card-2.png){width=90%}
+![](image/10-incident-card-2.png){width=90%}
 
 Карточка инцидента №2: компрометация рабочей станции администратора
 :::
@@ -227,19 +227,19 @@ graph TD
 В ViPNet IDS NS по правилу `ET POLICY MS Remote Desktop Administrator Login Request` (код 2012709, класс `protocol-command-decode`) зафиксировано 29 однотипных событий за 10 секунд — характерный признак перебора пароля (brute-force) по RDP (рис. -@fig-rdp-event – -@fig-rdp-dest). Источник — уже скомпрометированный веб-сервер (10.10.1.20), получатель — контроллер домена (10.10.2.10, порт 3389).
 
 ::: {#fig-rdp-event}
-![](image/lab01/06-rdp-event.png){width=90%}
+![](image/06-rdp-event.png){width=90%}
 
 Событие ViPNet IDS NS: `ET POLICY MS Remote Desktop Administrator Login Request`, 29 событий за 10 секунд
 :::
 
 ::: {#fig-rdp-source}
-![](image/lab01/07-rdp-source.png){width=70%}
+![](image/07-rdp-source.png){width=70%}
 
 Источник события: 10.10.1.20 (ранее скомпрометированный Web Server PHP)
 :::
 
 ::: {#fig-rdp-dest}
-![](image/lab01/08-rdp-dest.png){width=70%}
+![](image/08-rdp-dest.png){width=70%}
 
 Получатель события: MS Active Directory 10.10.2.10, порт 3389
 :::
@@ -249,7 +249,7 @@ graph TD
 Источник — Web Server PHP (10.10.1.20), поражённый актив — MS Active Directory (10.10.2.10), индикаторы компрометации — `protocol-command-decode/MS Remote Desktop Administrator Login Request/brute-force`, рекомендации — сменить пароль администратора AD, проверить и удалить все добавленные нарушителем учётные записи, ограничить доступ по RDP к контроллеру домена только с доверенных узлов (рис. -@fig-card-3).
 
 ::: {#fig-card-3}
-![](image/lab01/11-incident-card-3.png){width=90%}
+![](image/11-incident-card-3.png){width=90%}
 
 Карточка инцидента №3: перебор пароля администратора домена
 :::

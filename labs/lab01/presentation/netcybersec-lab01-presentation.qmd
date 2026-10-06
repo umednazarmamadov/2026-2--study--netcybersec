@@ -71,7 +71,7 @@ date-format: "YYYY-MM-DD"
 
 ## Уязвимость 1. SQL-инъекция
 
-![Событие ViPNet IDS NS: sqlmap-сканирование](image/lab01/01-sql-event.png){width=85%}
+![Событие ViPNet IDS NS: sqlmap-сканирование](image/01-sql-event.png){height=42%}
 
 - Карточка: источник Kali (195.239.174.11), актив Web Server PHP
 - Устранение: `ss -K` убита сессия, в `NewsController.php` добавлена валидация `is_numeric($id)`
@@ -84,7 +84,7 @@ date-format: "YYYY-MM-DD"
 
 ## Карточка инцидента №1
 
-![Заполненная карточка: SQL-инъекция](image/lab01/09-incident-card-1.png){width=90%}
+![Заполненная карточка: SQL-инъекция](image/09-incident-card-1.png){width=90%}
 
 ::: notes
 - Источник, поражённый актив, индикаторы компрометации, рекомендации.
@@ -92,7 +92,7 @@ date-format: "YYYY-MM-DD"
 
 ## Уязвимость 2. Компрометация рабочей станции администратора
 
-![Событие ViPNet IDS NS: Metasploit payload](image/lab01/03-metasploit-event.png){width=85%}
+![Событие ViPNet IDS NS: Metasploit payload](image/03-metasploit-event.png){height=42%}
 
 - Фишинговое письмо → meterpreter-сессия на Admin Workstation
 - Устранение: `taskkill` сессии, включён Windows Defender (`DisableAntiSpyware`, `DisableRealtimeMonitoring` убраны из реестра), перезапущена служба `WinDefend`
@@ -104,14 +104,14 @@ date-format: "YYYY-MM-DD"
 
 ## Карточка инцидента №2
 
-![Заполненная карточка: компрометация рабочей станции](image/lab01/10-incident-card-2.png){width=90%}
+![Заполненная карточка: компрометация рабочей станции](image/10-incident-card-2.png){width=90%}
 
 ::: notes
 :::
 
 ## Уязвимость 3. Захват контроллера домена
 
-![Событие ViPNet IDS NS: brute-force по RDP](image/lab01/06-rdp-event.png){width=85%}
+![Событие ViPNet IDS NS: brute-force по RDP](image/06-rdp-event.png){height=42%}
 
 - 29 запросов аутентификации за 10 секунд с уже скомпрометированного Web Server PHP на MS AD
 - Устранение: удалена нелегитимная учётная запись `hacker` (`Remove-ADUser`), сменён пароль администратора домена (`net user Administrator *`)
@@ -122,7 +122,7 @@ date-format: "YYYY-MM-DD"
 
 ## Карточка инцидента №3
 
-![Заполненная карточка: перебор пароля AD](image/lab01/11-incident-card-3.png){width=90%}
+![Заполненная карточка: перебор пароля AD](image/11-incident-card-3.png){width=90%}
 
 ::: notes
 :::
