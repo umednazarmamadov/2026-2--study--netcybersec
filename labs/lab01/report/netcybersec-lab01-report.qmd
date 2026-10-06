@@ -1,7 +1,7 @@
 ---
 ## Author
 author:
-  name: Назармамадов Умед Джумаевич
+  name: Назармамадов Умед Джамшедович
   degrees: студент
   email: umednazarmamadov40@gmail.com
   affiliation:
